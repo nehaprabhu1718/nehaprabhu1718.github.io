@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Random - Neha Prabhu" description="Random thoughts and miscellaneous content">
+  <section class="page-header">
+    <h1>Random</h1>
+    <p class="page-intro">
+      Miscellaneous things that don't fit anywhere else.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Interests</h2>
+    <p>
+      <!-- Add your interests/hobbies -->
+      When I'm not working, I enjoy [your hobbies and interests].
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Currently reading</h2>
+    <ul class="book-list">
+      <li>
+        <span class="book-title">Book Title</span>
+        <span class="book-author">by Author Name</span>
+      </li>
+      <!-- Add more books -->
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Favorite quotes</h2>
+    <blockquote class="quote">
+      <p>"Your favorite quote here."</p>
+      <cite>- Author</cite>
+    </blockquote>
+  </section>
+
+  <section class="section">
+    <h2>Things I like</h2>
+    <ul class="things-list">
+      <li>Thing 1</li>
+      <li>Thing 2</li>
+      <li>Thing 3</li>
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .page-intro {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    text-transform: lowercase;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  .book-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .book-list li {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .book-list li:last-child {
+    border-bottom: none;
+  }
+
+  .book-title {
+    font-weight: 500;
+  }
+
+  .book-author {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .quote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.5rem;
+    margin: 0;
+  }
+
+  .quote p {
+    font-style: italic;
+    font-size: 1.125rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .quote cite {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .things-list {
+    list-style: disc;
+    color: var(--color-text-muted);
+    margin-left: 1.25rem;
+  }
+
+  .things-list li {
+    margin-bottom: 0.25rem;
+  }
+</style>

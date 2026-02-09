@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const projects = [
+  {
+    title: 'Kafka to Lakebase RTM',
+    description: 'Real-time data streaming from Apache Kafka into Databricks Lakebase using Structured Streaming. Features a custom LakebaseForeachWriter with batched writes, supporting insert, upsert, and bulk-insert modes.',
+    tags: ['Python', 'Kafka', 'Databricks', 'Structured Streaming', 'PostgreSQL'],
+    link: '#',
+    github: 'https://github.com/np-builds/kafka-to-lakebase-rtm',
+  },
+];
+---
+
+<Layout title="Projects - Neha Prabhu" description="Personal and professional projects">
+  <section class="page-header">
+    <h1>Projects</h1>
+    <p class="page-intro">
+      Things I've built and worked on.
+    </p>
+  </section>
+
+  <section class="projects-grid">
+    {projects.map((project) => (
+      <article class="project-card">
+        <h2 class="project-title">{project.title}</h2>
+        <p class="project-description">{project.description}</p>
+        <div class="project-tags">
+          {project.tags.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+        <div class="project-links">
+          {project.link !== '#' && (
+            <a href={project.link} target="_blank" rel="noopener noreferrer" class="project-link">
+              View Project &rarr;
+            </a>
+          )}
+          {project.github !== '#' && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" class="project-link">
+              GitHub &nearr;
+            </a>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .page-intro {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  .projects-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .project-card {
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-bg-secondary);
+    transition: border-color var(--transition);
+  }
+
+  .project-card:hover {
+    border-color: var(--color-text-muted);
+  }
+
+  .project-title {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .project-description {
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text-muted);
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .project-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+</style>

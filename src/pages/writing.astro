@@ -1,0 +1,141 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const articles = [
+  {
+    title: 'SQL to NoSQL: Data Migration Best Practices & Strategy',
+    description: 'Addressing the complexities of transitioning from relational to NoSQL databases with strategic guidance.',
+    date: 'December 2024',
+    link: 'https://medium.com/@neha_prabhu/sql-to-nosql-data-migration-best-practices-strategy-cee9ae095b48',
+    external: true,
+  },
+  {
+    title: 'Connecting to your Oracle Database using Databricks!',
+    description: 'Technical guide for establishing connections to Oracle databases through Databricks using Apache Spark and Scala.',
+    date: 'June 2024',
+    link: 'https://medium.com/@neha_prabhu/connecting-to-your-oracle-database-using-databricks-c18b5d646495',
+    external: true,
+  },
+];
+---
+
+<Layout title="Writing - Neha Prabhu" description="Articles, blog posts, and thoughts">
+  <section class="page-header">
+    <h1>Writing</h1>
+    <p class="page-intro">
+      Thoughts, articles, and things I've written.
+    </p>
+  </section>
+
+  <section class="articles-list">
+    {articles.map((article) => (
+      <article class="article-item">
+        <a href={article.link} class="article-link" target={article.external ? '_blank' : '_self'} rel={article.external ? 'noopener noreferrer' : ''}>
+          <div class="article-content">
+            <h2 class="article-title">
+              {article.title}
+              {article.external && <span class="external-icon">&nearr;</span>}
+            </h2>
+            <p class="article-description">{article.description}</p>
+          </div>
+          <span class="article-date">{article.date}</span>
+        </a>
+      </article>
+    ))}
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .page-intro {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  .articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .article-item {
+    background: rgba(244, 114, 182, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(244, 114, 182, 0.25);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  }
+
+  .article-item:hover {
+    background: rgba(244, 114, 182, 0.25);
+    border-color: rgba(244, 114, 182, 0.5);
+    box-shadow: 0 4px 20px rgba(244, 114, 182, 0.2), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .article-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 1.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .article-link:hover {
+    color: inherit;
+  }
+
+  .article-link:hover .article-title {
+    color: #ec4899;
+  }
+
+  .article-content {
+    flex: 1;
+  }
+
+  .article-title {
+    font-size: 1.125rem;
+    margin: 0 0 0.5rem;
+    color: #f9a8d4;
+    transition: color var(--transition);
+  }
+
+  .external-icon {
+    margin-left: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .article-description {
+    color: var(--color-text-muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .article-date {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 600px) {
+    .article-link {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .article-date {
+      order: -1;
+    }
+  }
+</style>

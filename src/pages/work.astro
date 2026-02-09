@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Placeholder for work/experience items
+const experiences = [
+  {
+    company: 'Databricks',
+    role: 'Sr. Solutions Engineer',
+    period: 'Dec 2024 – Present',
+    description: 'Partnering with enterprise customers to architect and validate data & AI solutions through technical evaluations, POCs, and hands-on demos. Specializing in streaming pipelines, data engineering, and AI/ML workflows across manufacturing, healthcare, and financial services.',
+    link: '#',
+  },
+  {
+    company: 'PeerIslands',
+    role: 'Software Engineer',
+    period: 'Jun 2022 – Dec 2024',
+    description: 'Served as a customer-facing deployed engineer at a fast-growing startup, designing and implementing end-to-end data platform solutions. Built scalable data science and data engineering solutions for enterprise companies. Partnered heavily with MongoDB\'s GTM Teams.',
+    link: '#',
+  },
+];
+---
+
+<Layout title="Work - Neha Prabhu" description="Professional experience and work history">
+  <section class="page-header">
+    <h1>Work</h1>
+    <p class="page-intro">
+      My professional experience and career journey.
+    </p>
+  </section>
+
+  <section class="timeline">
+    {experiences.map((exp) => (
+      <article class="timeline-card">
+        <div class="timeline-dot"></div>
+        <div class="card-content">
+          <div class="card-header">
+            <div>
+              <h2 class="company">{exp.company}</h2>
+              <p class="role">{exp.role}</p>
+            </div>
+            <span class="period">{exp.period}</span>
+          </div>
+          <div class="card-body">
+            <p class="description">{exp.description}</p>
+            {exp.link !== '#' && (
+              <a href={exp.link} class="experience-link" target="_blank" rel="noopener noreferrer">
+                Learn more &rarr;
+              </a>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </section>
+</Layout>
+
+<style>
+  .page-header {
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .page-intro {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+    margin: 0;
+  }
+
+  /* Vertical connecting line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--color-accent);
+    border-radius: 1px;
+  }
+
+  .timeline-card {
+    position: relative;
+    margin-bottom: 2rem;
+    cursor: pointer;
+  }
+
+  .timeline-card:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Dot on the timeline */
+  .timeline-dot {
+    position: absolute;
+    left: -40px;
+    top: 20px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    border: 2px solid var(--color-bg);
+    transform: translateX(4px);
+    z-index: 1;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+    z-index: 1;
+  }
+
+  /* Card styling */
+  .card-content {
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .timeline-card:hover .card-content {
+    border-color: var(--color-accent);
+  }
+
+  .timeline-card:hover .timeline-dot {
+    box-shadow: 0 0 8px var(--color-accent);
+  }
+
+  /* Active (expanded) state */
+  .timeline-card.active .card-content {
+    transform: scale(1.02);
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px rgba(244, 114, 182, 0.15), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .timeline-card.active .timeline-dot {
+    box-shadow: 0 0 12px var(--color-accent);
+    transform: translateX(4px) scale(1.2);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .company {
+    font-size: 1.25rem;
+    margin: 0 0 0.25rem;
+  }
+
+  .role {
+    color: var(--color-accent);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .period {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  /* Description hidden by default */
+  .card-body {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease, opacity 0.25s ease, margin-top 0.25s ease;
+    margin-top: 0;
+  }
+
+  .timeline-card.active .card-body {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 1rem;
+  }
+
+  .description {
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .experience-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .timeline {
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      left: 5px;
+    }
+
+    .timeline-dot {
+      left: -28px;
+      transform: translateX(0);
+    }
+
+    .timeline-card.active .timeline-dot {
+      transform: translateX(0) scale(1.2);
+    }
+
+    .card-header {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .period {
+      order: -1;
+    }
+
+    .card-content {
+      padding: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.timeline-card').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) return;
+      card.classList.toggle('active');
+    });
+  });
+</script>

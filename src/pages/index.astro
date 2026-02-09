@@ -1,0 +1,254 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Neha Prabhu">
+  <section class="hero">
+    <h1><img src="/cherry-blossom-branch.png" alt="" class="heading-flower" /> Hi, I'm <span class="highlight">Neha Prabhu</span></h1>
+
+    <div class="hero-content">
+      <div class="photo-container">
+        <img
+          src="/Pink_Background_Image.jpg"
+          alt="Neha Prabhu"
+          class="profile-photo"
+        />
+      </div>
+
+      <div class="about-me">
+        <h2>About Me</h2>
+        <p>
+          I'm a Solutions Engineer at Databricks, where I help companies architect and scale their data & AI platforms, with a focus on the intersection of systems and people. I also care deeply about education - especially teaching computer science.
+        </p>
+        <p>
+          After spending many long and cold winters in Urbana-Champaign, I'm now based in the San Francisco Bay Area.
+        </p>
+        <div class="cta-links">
+          <a href="/work" class="cta-link">view my work &rarr;</a>
+          <a href="/projects" class="cta-link">see projects &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Get in touch</h2>
+    <p>
+      Feel free to reach out via <a href="mailto:email@example.com">email</a> or connect with me on
+      <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    margin-bottom: 4rem;
+    max-width: 900px;
+  }
+
+  .hero h1 {
+    font-size: 2.75rem;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.03em;
+  }
+
+  .highlight {
+    color: #ec4899;
+    position: relative;
+    cursor: default;
+  }
+
+  .heading-flower {
+    height: 1.5em;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 0.25rem;
+  }
+
+
+  .hero-content {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+
+  .photo-container {
+    flex: 0 0 271px;
+    width: 271px;
+    height: 271px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    overflow: hidden;
+  }
+
+  .profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    transform: scale(1.67);
+  }
+
+  .about-me {
+    flex: 1;
+  }
+
+  .about-me h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+    color: var(--color-text);
+  }
+
+  .about-me p {
+    font-family: 'Google Sans Code', monospace;
+    font-weight: 300;
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .cta-links {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .cta-link {
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color var(--transition);
+  }
+
+  .cta-link:hover {
+    color: var(--color-accent);
+  }
+
+  .section {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+  }
+
+  .section h2 {
+    font-size: 1.25rem;
+    color: #500724;
+    text-transform: lowercase;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    margin-top: 0;
+  }
+
+  .section a {
+    color: #500724;
+  }
+
+  .section a:hover {
+    color: #f9a8d4;
+  }
+
+  .section p {
+    color: #500724;
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .photo-container {
+      flex: 0 0 200px;
+    }
+
+    .profile-photo {
+      width: 200px;
+      height: 200px;
+    }
+
+    .cta-links {
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<style is:global>
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    font-size: 14px;
+    line-height: 1;
+    animation: sparkle-fade 0.6s ease-out forwards;
+  }
+
+  @keyframes sparkle-fade {
+    0% {
+      opacity: 1;
+      transform: scale(0) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1) rotate(180deg);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5) rotate(360deg) translateY(-20px);
+    }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    var highlight = document.querySelector('.highlight');
+    var sparkleChars = ['\u2726', '\u2727', '\u2B52', '\u2736', '\u2734'];
+    var colors = ['#ec4899', '#f9a8d4', '#fbcfe8', '#fce7f3', '#ffffff'];
+
+    function createSparkle(x, y) {
+      var el = document.createElement('span');
+      el.classList.add('sparkle');
+      el.textContent = sparkleChars[Math.floor(Math.random() * sparkleChars.length)];
+      el.style.left = (x + (Math.random() - 0.5) * 30) + 'px';
+      el.style.top = (y + (Math.random() - 0.5) * 30) + 'px';
+      el.style.color = colors[Math.floor(Math.random() * colors.length)];
+      el.style.fontSize = (8 + Math.random() * 12) + 'px';
+      document.body.appendChild(el);
+      el.addEventListener('animationend', function() { el.remove(); });
+    }
+
+    var interval = null;
+    var mouseX = 0;
+    var mouseY = 0;
+
+    if (highlight) {
+      highlight.addEventListener('mouseenter', function() {
+        interval = setInterval(function() {
+          createSparkle(mouseX, mouseY);
+        }, 50);
+      });
+
+      highlight.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      highlight.addEventListener('mouseleave', function() {
+        if (interval) {
+          clearInterval(interval);
+          interval = null;
+        }
+      });
+    }
+  });
+</script>

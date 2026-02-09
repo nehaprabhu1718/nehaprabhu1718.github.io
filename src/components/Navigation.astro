@@ -1,0 +1,110 @@
+---
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/work', label: 'work' },
+  { href: '/writing', label: 'writing' },
+  { href: '/projects', label: 'projects' },
+];
+---
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/" class="nav-logo"><img src="/cherry-blossom-pink.png" alt="" class="nav-flower" />np</a>
+    <ul class="nav-links">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class:list={['nav-link', { active: pathname.startsWith(link.href) }]}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+  }
+
+  .nav-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .nav-flower {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-logo:hover {
+    color: var(--color-accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+  }
+
+  .nav-link {
+    color: #f9a8d4;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color var(--transition);
+    position: relative;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #ec4899;
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--color-accent);
+  }
+
+  @media (max-width: 600px) {
+    .nav {
+      padding: 1rem;
+    }
+
+    .nav-links {
+      gap: 1.25rem;
+    }
+
+    .nav-link {
+      font-size: 0.875rem;
+    }
+  }
+</style>
