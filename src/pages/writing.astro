@@ -3,6 +3,13 @@ import Layout from '../layouts/Layout.astro';
 
 const articles = [
   {
+    title: 'claude desktop integration with databricks genie mcp',
+    subtitle: "Presented at New Enterprise Associate's Demo Night",
+    description: '',
+    date: 'January 2026',
+    video: '/Databricks_ManagedMCPServers.mp4',
+  },
+  {
     title: 'SQL to NoSQL: Data Migration Best Practices & Strategy',
     description: 'Addressing the complexities of transitioning from relational to NoSQL databases with strategic guidance.',
     date: 'December 2024',
@@ -23,23 +30,46 @@ const articles = [
   <section class="page-header">
     <h1>Writing</h1>
     <p class="page-intro">
-      Thoughts, articles, and things I've written.
+      Thoughts, blogs I've written & more.
     </p>
   </section>
 
   <section class="articles-list">
     {articles.map((article) => (
       <article class="article-item">
-        <a href={article.link} class="article-link" target={article.external ? '_blank' : '_self'} rel={article.external ? 'noopener noreferrer' : ''}>
-          <div class="article-content">
-            <h2 class="article-title">
-              {article.title}
-              {article.external && <span class="external-icon">&nearr;</span>}
-            </h2>
-            <p class="article-description">{article.description}</p>
+        {article.video ? (
+          <div class="article-card">
+            <button class="article-card-toggle" aria-expanded="false">
+              <div class="article-card-header">
+                <div class="article-content">
+                  <h2 class="article-title">{article.title}</h2>
+                  {article.subtitle && <p class="article-subtitle"><em>{article.subtitle}</em></p>}
+                </div>
+                <div class="toggle-right">
+                  <span class="article-date">{article.date}</span>
+                  <span class="toggle-icon">&#9660;</span>
+                </div>
+              </div>
+            </button>
+            <div class="video-container" hidden>
+              <video controls preload="metadata">
+                <source src={article.video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
-          <span class="article-date">{article.date}</span>
-        </a>
+        ) : (
+          <a href={article.link} class="article-link" target={article.external ? '_blank' : '_self'} rel={article.external ? 'noopener noreferrer' : ''}>
+            <div class="article-content">
+              <h2 class="article-title">
+                {article.title}
+                {article.external && <span class="external-icon">&nearr;</span>}
+              </h2>
+              <p class="article-description">{article.description}</p>
+            </div>
+            <span class="article-date">{article.date}</span>
+          </a>
+        )}
       </article>
     ))}
   </section>
@@ -67,9 +97,9 @@ const articles = [
   }
 
   .article-item {
-    background: rgba(244, 114, 182, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(50, 20, 40, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(244, 114, 182, 0.25);
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -77,7 +107,7 @@ const articles = [
   }
 
   .article-item:hover {
-    background: rgba(244, 114, 182, 0.25);
+    background: rgba(60, 25, 48, 0.98);
     border-color: rgba(244, 114, 182, 0.5);
     box-shadow: 0 4px 20px rgba(244, 114, 182, 0.2), 0 2px 8px rgba(0, 0, 0, 0.2);
   }
@@ -128,10 +158,77 @@ const articles = [
     white-space: nowrap;
   }
 
+  .article-card-toggle {
+    display: block;
+    width: 100%;
+    padding: 1.5rem;
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .article-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .article-card-toggle .article-title {
+    margin-bottom: 0;
+  }
+
+  .toggle-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .toggle-icon {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    transition: transform 0.3s ease;
+  }
+
+  .article-card-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .article-subtitle {
+    color: var(--color-text-muted);
+    margin: 0.25rem 0 0;
+    font-size: 0.95rem;
+  }
+
+  .video-container {
+    padding: 0 1.5rem 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .video-container video {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+  }
+
   @media (max-width: 600px) {
     .article-link {
       flex-direction: column;
       gap: 0.5rem;
+    }
+
+    .article-card-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toggle-right {
+      order: -1;
     }
 
     .article-date {
@@ -139,3 +236,16 @@ const articles = [
     }
   }
 </style>
+
+<script>
+  document.querySelectorAll('.article-card-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      const video = btn.nextElementSibling;
+      if (video) {
+        video.hidden = expanded;
+      }
+    });
+  });
+</script>

@@ -9,6 +9,14 @@ const projects = [
     link: '#',
     github: 'https://github.com/np-builds/kafka-to-lakebase-rtm',
   },
+  {
+    title: 'Underrepresented Student Learning in Online Introductory STEM College Courses',
+    description: 'Students in all disciplines - but especially in disciplines in which they are underrepresented - have increased chances of succeeding if they feel a sense of community and belonging. Both women and underrepresented ethnic and racial minorities (URMs) face significant challenges to persist and major in engineering. This research focuses on interpreting learning patterns of students in challenging CS/ECE courses and measures feelings of student belonging.',
+    citation: 'Prabhu, N., & Perry, M., & Azevedo, R. F. L., & Angrave, L., & Bhat, S. (2021, July), Study Partners Matter: Impacts on Inclusion and Outcomes. Paper presented at 2021 ASEE Virtual Annual Conference.',
+    tags: ['Research', 'Education', 'CS/ECE', 'Survey Design', 'ASEE'],
+    link: 'https://peer.asee.org/study-partners-matter-impacts-on-inclusion-and-outcomes',
+    github: '#',
+  },
 ];
 ---
 
@@ -25,6 +33,9 @@ const projects = [
       <article class="project-card">
         <h2 class="project-title">{project.title}</h2>
         <p class="project-description">{project.description}</p>
+        {project.citation && (
+          <p class="project-citation">{project.citation}</p>
+        )}
         <div class="project-tags">
           {project.tags.map((tag) => (
             <span class="tag">{tag}</span>
@@ -33,7 +44,7 @@ const projects = [
         <div class="project-links">
           {project.link !== '#' && (
             <a href={project.link} target="_blank" rel="noopener noreferrer" class="project-link">
-              View Project &rarr;
+              {project.citation ? 'View Paper' : 'View Project'} &rarr;
             </a>
           )}
           {project.github !== '#' && (
@@ -69,14 +80,19 @@ const projects = [
 
   .project-card {
     padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background-color: var(--color-bg-secondary);
-    transition: border-color var(--transition);
+    border: 1px solid rgba(244, 114, 182, 0.25);
+    border-radius: 12px;
+    background: rgba(50, 20, 40, 0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   }
 
   .project-card:hover {
-    border-color: var(--color-text-muted);
+    background: rgba(60, 25, 48, 0.98);
+    border-color: rgba(244, 114, 182, 0.5);
+    box-shadow: 0 4px 20px rgba(244, 114, 182, 0.2), 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
   .project-title {
@@ -88,6 +104,15 @@ const projects = [
     color: var(--color-text-muted);
     margin: 0 0 1rem;
     font-size: 0.95rem;
+  }
+
+  .project-citation {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 0 0 1rem;
+    padding-left: 0.75rem;
+    border-left: 2px solid rgba(244, 114, 182, 0.4);
   }
 
   .project-tags {
